@@ -1,20 +1,22 @@
 ary = list(map(int, input('배열 입력 >>').split()))
 key = int(input('찾고자 하는 수'))
 
-# 현 배열에서 중간
-div = int(len(ary)/2)
-print(div)
+start = 0
+end = len(ary) - 1
+mid = 0
 
-while True:
+while start <= end:
+    mid = (start + end) // 2
+
     # 찾았다
-    if(ary[div] == key):
-        print('발견 :', ary[div])
+    if(ary[mid] == key):
+        print('발견 :', ary[mid])
         break
     # 못찾았다
-    elif(ary[div] < key):
+    elif(ary[mid] < key):
         print('up')
-        div = int((div + div*2) / 2)
-    elif(ary[div] > key):
+        start = mid + 1
+    elif(ary[mid] > key):
         print('down')
-        div = int(div/2)
+        end = mid - 1
 
