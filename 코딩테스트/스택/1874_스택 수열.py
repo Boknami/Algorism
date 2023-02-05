@@ -9,11 +9,13 @@ for i in range(n):
     
     # push
     while cur <= find:
+            print(cur)
             stack.append(cur)
             ans.append('+')
             cur += 1
     # pop
     if(stack[-1] == find):
+        print('pop',cur)
         stack.pop()
         ans.append('-')
         if(i == n- 1):
