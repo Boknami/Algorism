@@ -1,35 +1,76 @@
 class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
-    
+  def __init__(self, value):
+    self.value = value      
+    self.next = None    
+
 class LinkedList:
-    def __init__(self, value):
-        self.head = value
+  def __init__(self, value):
+    self.head = Node(value)	
+    self.size = 1
 
-peo = list(map(int, input().split()))
-num = peo[0]
-select = peo[1]
+  def addN(self, value):
+    sd = self.head
 
-for i in range(num + 1):
-    if (i == 0): i = 1
-
-    if (i == 1):
-        node = Node(i)
-        list = LinkedList(node)
-    else:
-        cur = list.head
-
-        while (cur.next != None):
-            cur = cur.next
-        
-        node = Node(i)
-        cur.next = node
+    while(sd.next != None):
+      sd = sd.next
     
-    if(i == num):
-        node.next = list.head
+    sd.next = Node(value)
+    self.size += 1
 
-cur = list.head
-for j in range(3):
-    cur = cur.next
-cur
+    if(n == self.size):
+      sd.next.next = self.head
+  
+  def delN(self, cnt):
+    sd = self.head
+    re = 0
+    while(re != (cnt-1)):
+      sd = sd.next
+      re += 1
+    
+    yosp.append(sd.next.value) 
+    self.size -= 1
+    sd.next = sd.next.next
+
+# main 부분
+n,k = map(int, (input().split()))
+L = LinkedList(1)
+yosp = []
+
+for i in range(2, n+1):
+  L.addN(i)
+
+cur = 0
+move = k-1
+
+cur += move
+L.delN(cur)
+
+cur += move
+L.delN(cur)
+
+cur += move
+L.delN(cur)
+while(L.size <= cur):
+  cur -= (L.size+1)
+
+cur += move
+L.delN(cur)
+while(L.size <= cur):
+  cur -= L.size
+
+cur += move
+L.delN(cur)
+while(L.size <= cur):
+  cur -= L.size
+
+cur += move
+L.delN(cur)
+while(L.size <= cur):
+  cur -= L.size
+
+cur += move
+L.delN(cur)
+while(L.size <= cur):
+  cur -= L.size
+
+print("<" + ",".join(map(str,(yosp))) + ">" ,end="")
