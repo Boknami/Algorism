@@ -1,74 +1,35 @@
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
-        
-class Tree:
-    def __init__(self):
-        self.root = None
+ # 딕셔너리 이용해서 찾는 문제
+def preorder(node):
+    if(node != None):
+        print(node, end='')
+        preorder(tree[node][0])
+        preorder(tree[node][1])
+    if(node == 'A'): print('')
+ 
+def inorder(node):
+    if(node != None):
+        inorder(tree[node][0])  # left
+        print(node, end='')  # root
+        inorder(tree[node][1])  # right
+    if(node == 'A'): print('')
+ 
+ 
+def postorder(node):
+    if(node != None):
+        postorder(tree[node][0])  # left
+        postorder(tree[node][1])  # right
+        print(node, end='')  # root
+    if(node == 'A'): print('')
 
-    def Addnode(self, a, b, c):
-        if(self.root == None):
-            self.root = Node(a)
-            self.root.left = Node(b)
-            self.root.right = Node(c)
-        else: 
-            # 찾은 값을 그냥 함수로 self.FindValue(a)만 하고 a를 바로 사용함.
-            # select같은 변수로 받아놓고 select를 써야지.
-            k = self.FindValue(a)
-            k.left = b
-            k.right = c
+tree = {}
+n = int(input())
 
-    #전위로 값 찾기
-    def FindValue(self, find):
-        def _preorder(node):
-            if(node.value == find):
-                print(node.value)
-                print(node.left)
-                print(node.right)
-                return node
-            if node.left:
-                _preorder(node.left)
-            if node.right:
-                _preorder(node.right)
-        return _preorder(self.root)
-
-    #전위
-    def preorder(self):
-        def _preorder(node):
-            print(node.item, end=' ')
-            if node.left:
-                _preorder(node.left)
-            if node.right:
-                _preorder(node.right)
-        _preorder(self.root)
-    
-    #중위
-    def inorder(self):
-        def _inorder(node):
-            if node.left:
-                _inorder(node.left)
-            print(node.item, end=' ')
-            if node.right:
-                _inorder(node.right)
-        _inorder(self.root)
-
-    #후위
-    def postorder(self):
-        def _postorder(node):
-            if node.right:
-                _postorder(node.right)
-            if node.left:
-                _postorder(node.left)
-            print(node.item, end=' ')
-        _postorder(self.root)
-
-N = int(input())
-tree = Tree()
-
-for i in range(N):
+for i in range(n):
     a, b, c = input().split()
-    tree.Addnode(a, b, c)
+    if(b == '.'): b = None
+    if(c == '.'): c = None
+    tree[a] = [b, c]
 
-tree.preorder()
+preorder('A')
+inorder('A')
+postorder('A')
