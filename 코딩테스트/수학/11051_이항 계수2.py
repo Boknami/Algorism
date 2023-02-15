@@ -1,23 +1,16 @@
-def fac(N, k, m):
-    global res
-    res = 1
+import sys
+sys.setrecursionlimit(10**5)
 
-    if(m == k): return
-    m+=1
-    res = res * N
-    fac(N-1, k, m)
-
-def fac1(K,m):
-    global res2
-    res2 = 1
-
-    if(m == K): return
-    m+=1
-    res2 = res2 * K
-    fac1(K+1, m)
+def factorial(n, cnt, tar):
+    if(n > 1 and cnt != tar):
+        cnt += 1
+        return n * factorial(n-1, cnt, tar)
+    else:
+        return 1
 
 N,K = map(int,input().split())
-fac(N,K,0)
-fac1(K,0)
+s1 = factorial(N,0,K)
+s2 = factorial(K,0,K)
+s3 = s1//s2
 
-print(res, res2)
+print(int(s3%10007))
