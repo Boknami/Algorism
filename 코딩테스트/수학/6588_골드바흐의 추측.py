@@ -1,20 +1,18 @@
-import sys
-import math
+from sys import stdin
 
-n = 1000000
-ary = [True for i in range(n+1)]
+array = [True for i in range(1000001)]
 
-while(n != 0):
-    n = int(input())
-    
-    #제곱근까지 반복 진행
-    for i in range(2, int(math.sqrt(n)) + 1):
-        if(ary[i] == True):
-            k = 2
+for i in range(2, 1001):
+    if array[i]:
+        for k in range(i + i, 1000001, i):
+            array[k] = False
 
-            while (i * k <= n):
-                ary[i * k] = False
-                k += 1
+while True:
+    n = int(stdin.readline())
 
-    for j in range(2, n+1):
-        if(ary[j]): print(j, end =' ')
+    if n == 0: break
+
+    for i in range(3, len(array)):
+        if array[i] and array[n-i]:
+            print(n, "=", i, "+", n-i)
+            break
