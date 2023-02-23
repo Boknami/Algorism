@@ -10,17 +10,14 @@ else:
         for i in range(2, ma):
             print(i, ma)
             a = i * i
+            print(i, ma)
             if(a >= ma):
-                print('끝', a, i)
                 break
             value = a
 
-            # 2의 제곱수인 4로 나누어진다면
-            # 16의 제곱수는 할 필요도 없다.
             while(value <= ma):
                 if(not ary.__contains__(value)):
                     ary.append(value)
                 value += a
 
-    print('--------------')
     print(ma - len(ary))
