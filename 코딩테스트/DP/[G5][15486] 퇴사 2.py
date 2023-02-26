@@ -9,6 +9,7 @@ for i in range(n):
     t, p = map(int,input().split())
     schedual.append([t,p])
 
+# 스케쥴 가능한 경우들 확인
 for i in range(n):
     if(i + schedual[i][0] > n):
         continue
