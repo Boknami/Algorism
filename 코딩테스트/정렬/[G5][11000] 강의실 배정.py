@@ -1,28 +1,29 @@
-def check()
+# 다른 방법
+# 트리처럼 서로 연결되어 있으면 세는 연결요소?
+import heapq
+import sys
+input=sys.stdin.readline
 
 n = int(input())
-q = []
+schedule = []
+P_q= []
 
 for i in range(n):
     s, e = map(int, input().split())
-    q.append([s, e])
+    schedule.append([s, e])
 
-q.sort()
+# 시작 시간 기준으로 정렬
+schedule.sort()
 
-# 가장 빠른 시간부터 강의 시작
-# 만약 겹치는 강의 시간이 있다면 그 강의 시간으로 연강
-cnt = 0
+# 우선순위 큐에 시작 시간이 젤 빠른 거 삽입
+heapq.heappush(P_q, schedule[0][1])
 
-while q:
-    start = q.pop(0)
-    cnt += 1
-    end = start[1]
+# 스케쥴 돌면서 종료시간, 최소 시작 시간 비교
+for i in range(1, n):
+    if(schedule[i][0] < P_q[0]): # 최소 시작 시간이 현재 강의보다 늦게 끝나면?
+        heapq.heappush(P_q, schedule[i][1])
+    else:
+        heapq.heappop(P_q)
+        heapq.heappush(P_q,schedule[i][1])
 
-    find = 0
-    for i in range(len(q)):
-        if(q[i][0] == end): # 시작 시간이 첫 강의에 끝이랑 맞아 떨어진다면?
-            find += 1
-            if(find >= 1):
-                q.pop(i)
-
-print(cnt)
+print(len(P_q))
