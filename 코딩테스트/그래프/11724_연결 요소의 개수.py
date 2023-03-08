@@ -1,28 +1,40 @@
 import sys
 sys.setrecursionlimit(10000)
+input = sys.stdin.readline
 
-# 재귀 dfs / num번 노드
-def dfs(num):
-    visited[num] = True # 방문 표시
-    for i in graph[num]: # 자식 노드 하나씩 돌면서
-        if not visited[i]:
-            dfs(i)
-            
-N, M = map(int, input().split())
-graph = [[0] for _ in range(N + 1)]
-visited = [False] * (N + 1)
+def make_dic(p, q):
+    if p in graph:
+        graph[p].append(q)
+    else:
+        graph[p] = [q]
+        
+alredy = []
 cnt = 0
+def dfs(find):
+    # 이미 거친건지 보고 안 거친거면 관련 자식들 빼자
+    alredy.append(find)
 
-# 노드에 연결 정보 담아주기
-for i in range(M):
-    n1, n2 = map(int, input().split())
-    graph[n1].append(n2)
-    graph[n2].append(n1)
+    # 자식 노드로 계속 파고든다.
+    for i in graph[find]:
+        if(i in alredy): continue
+        else : dfs(i)
 
-# 탐색
-for j in range(1, N + 1):
-    if not visited[j]: #아직 방문 안한 경우 dfs 탐색
-        dfs(j) # 해당 dfs를 빠져나왔다면 연결된 노드들은 다 탐색한 거임.
-        cnt += 1
+vertex, line = map(int, input().split())
+graph = {}
 
-print(cnt)
+for _ in range(line):
+    a,b = map(int, input().split())
+    make_dic(a, b)
+    make_dic(b, a)
+
+keys = list(graph.keys())
+
+for key in keys:
+    #이미 방문했다면 넘어가자
+    if(key in alredy):
+        continue
+
+    dfs(key)
+    cnt+=1
+remainders = vertex - len(keys)
+print(cnt + remainders)
