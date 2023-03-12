@@ -20,12 +20,14 @@ def bfs():
         for select in (q_value-1, q_value+1, q_value*2):
             # 방문여부 확인 후 큐에 넣자
             if(0 <= select <= MAX-1 and visited[select] == 0):
-                q.append(select)
-
                 if(select == q_value*2):
                     visited[select] = visited[q_value]
+                    q.appendleft(select)
                 else:
                     visited[select] = visited[q_value] + 1
+                    q.append(select)
+
+
                 
 start, target = map(int, input().split())
 bfs()
