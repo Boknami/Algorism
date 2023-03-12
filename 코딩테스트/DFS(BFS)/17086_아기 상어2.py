@@ -1,28 +1,29 @@
 import sys
+from collections import deque
 input=sys.stdin.readline
 
 def bfs(a, b):
-    q = []
+    q = deque()
     q.append([a,b,0])
+    visited = [[False for _ in range(col)] for _ in range(row)]
+    visited[a][b] = True
 
     while(q):
-        cur = q.pop()
+        cur = q.popleft()
 
         for i in range(8):
             x = dx[i] + cur[0]
             y = dy[i] + cur[1]
-
-            if(a==x and b==y):
-                continue
-            else:
-                if(0 <= x <= row-1 and 0 <= y <= col-1 and cage[x][y] == 0 ): 
-                    q.append([x,y,cur[2]+1])
             
-                if(0 <= x <= row-1 and 0 <= y <= col-1 and cage[x][y] == 1):
-                    print(x,y,cur[2])
-                    return (cur[2])
-        print(q)
-
+            if(0 <= x < row and 0 <= y < col and not visited[x][y]):
+                if(cage[x][y] == 1):
+                    print(q)
+                    return cur[2]
+                
+                q.append([x,y,cur[2]+1])
+                visited[x][y] = True
+            
+                
 row, col = map(int,input().split())
 cage = []
 
