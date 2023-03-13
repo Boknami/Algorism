@@ -29,7 +29,6 @@ while q:
         if( (0<= x <= N-1 and 0<= y<= M-1) and graph[x][y] == 0):
             q.append([x,y])
             graph[x][y] = graph[cur[0]][cur[1]] + 1
-            print(q)
 
 for i in (graph):
     for j in i:
