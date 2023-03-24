@@ -20,7 +20,7 @@ def dijkstra(start):
                 disLeast[go] = allCost
                 if(go == start) : continue
                 heapq.heappush(q, (allCost, go))
-    print(disLeast)
+    
     return disLeast
 
 cnt_stu, cnt_road, placeParty = map(int,input().split())
