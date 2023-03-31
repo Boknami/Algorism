@@ -1,19 +1,9 @@
-N = 1
-while(N != 0):
-    N = input()
-    if(int(N)==0): break
-    value = int(N)
-    N_list = list(map(int, str(N)))
+while True:
+    n = input()
 
-    if(100 <= value <= 999):
-        if(N_list[0] == N_list[2]):
-            print("yes")
-        else:
-            print("no")
-    elif(10000 <= value <= 99999):
-        if(N_list[0] == N_list[4] and N_list[1] == N_list[3]):
-            print("yes")
-        else:
-            print("no")
+    if n == '0': break
+
+    if n == n[::-1]:
+        print('yes')
     else:
-        print("no")
+        print('no')
