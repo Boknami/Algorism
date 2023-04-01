@@ -1,8 +1,7 @@
-ary = []
 n = int(input())
-for i in range(n):
-    ary.append(int(input()))
+nList = list(map(int, input().split()))
 m = int(input())
-for i in range(m):
-    for j in range(n):
-        if(ary[i] == ary)
+listCheck = list(map(int, input().split()))
+
+for idx in listCheck:
+    print(nList.count(idx), end=" ")    
