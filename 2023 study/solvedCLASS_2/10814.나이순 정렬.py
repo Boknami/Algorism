@@ -5,8 +5,8 @@ n = int(input())
 pList=[]
 
 for idx in range (n): 
-  a,b = map(str, input().split())
-  pList.append([int(a), idx, b]) 
+  age,name= map(str, input().split())
+  pList.append([int(age), idx, name]) 
 
 pList.sort()
 for idx in range(n):
